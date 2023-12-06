@@ -29,12 +29,6 @@ void Delete_any_pos(Node *head, int pos)
     tmp->next = tmp->next->next;
     delete newNode;
 }
-void delete_head(Node *&head)
-{
-    Node *newNode = head;
-    head = head->next;
-    delete newNode;
-}
 int size_lin(Node *head)
 {
     Node *tmp = head;
@@ -82,8 +76,6 @@ int main()
     //     any_pos_insert(Head, pos, val);
     if (pos >= size_lin(Head))
         cout << "invalid";
-    else if (pos == 0)
-        delete_head(Head);
     else
         Delete_any_pos(Head, pos);
     print(Head);

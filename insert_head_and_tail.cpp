@@ -11,7 +11,26 @@ public:
         this->next = NULL;
     }
 };
-void any_pos_insert(Node *head, int pos, int val)
+void insert_head(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+    newNode->next = head;
+    head = newNode;
+}
+void insert_tail(Node *head, int val)
+{
+    Node *newNode = new Node(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        return;
+    }
+    Node *tmp = head;
+    while (tmp->next != NULL)
+        tmp = tmp->next;
+    tmp->next = newNode;
+}
+void any_pos_insert(Node *&head, int pos, int val)
 {
     Node *newNode = new Node(val);
     Node *tmp = head;
@@ -19,21 +38,6 @@ void any_pos_insert(Node *head, int pos, int val)
         tmp = tmp->next;
     newNode->next = tmp->next;
     tmp->next = newNode;
-}
-void Delete_any_pos(Node *head, int pos)
-{
-    Node *tmp = head;
-    for (int i = 0; i < pos - 1; i++)
-        tmp = tmp->next;
-    Node *newNode = tmp->next;
-    tmp->next = tmp->next->next;
-    delete newNode;
-}
-void delete_head(Node *&head)
-{
-    Node *newNode = head;
-    head = head->next;
-    delete newNode;
 }
 int size_lin(Node *head)
 {
@@ -73,19 +77,15 @@ int main()
     cout << "Enter Pos : ";
     int pos;
     cin >> pos;
-    // cout << "Enter Value : ";
-    // int val;
-    // cin >> val;
-    // if (pos > size_lin(Head))
-    //     cout << "invalid";
-    // else
-    //     any_pos_insert(Head, pos, val);
-    if (pos >= size_lin(Head))
-        cout << "invalid";
+    cout << "Enter Value : ";
+    int val;
+    cin >> val;
+    if (pos > size_lin(Head))
+        insert_tail(Head, val);
     else if (pos == 0)
-        delete_head(Head);
+        insert_head(Head, val);
     else
-        Delete_any_pos(Head, pos);
+        any_pos_insert(Head, pos, val);
     print(Head);
     // cout << Head->val << " " << Head->next;
 

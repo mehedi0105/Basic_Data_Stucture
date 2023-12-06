@@ -20,21 +20,6 @@ void any_pos_insert(Node *head, int pos, int val)
     newNode->next = tmp->next;
     tmp->next = newNode;
 }
-void Delete_any_pos(Node *head, int pos)
-{
-    Node *tmp = head;
-    for (int i = 0; i < pos - 1; i++)
-        tmp = tmp->next;
-    Node *newNode = tmp->next;
-    tmp->next = tmp->next->next;
-    delete newNode;
-}
-void delete_head(Node *&head)
-{
-    Node *newNode = head;
-    head = head->next;
-    delete newNode;
-}
 int size_lin(Node *head)
 {
     Node *tmp = head;
@@ -73,19 +58,13 @@ int main()
     cout << "Enter Pos : ";
     int pos;
     cin >> pos;
-    // cout << "Enter Value : ";
-    // int val;
-    // cin >> val;
-    // if (pos > size_lin(Head))
-    //     cout << "invalid";
-    // else
-    //     any_pos_insert(Head, pos, val);
-    if (pos >= size_lin(Head))
+    cout << "Enter Value : ";
+    int val;
+    cin >> val;
+    if (pos > size_lin(Head))
         cout << "invalid";
-    else if (pos == 0)
-        delete_head(Head);
     else
-        Delete_any_pos(Head, pos);
+        any_pos_insert(Head, pos, val);
     print(Head);
     // cout << Head->val << " " << Head->next;
 
